@@ -11,61 +11,61 @@
  */
 
 export class PrettierConfigBuilder {
-  #config;
+    #config;
 
-  constructor() {
-    this.#config = {
-      arrowParens: 'always',
-      bracketSameLine: false,
-      objectWrap: 'preserve',
-      plugins: [],
-      proseWrap: 'never',
-      semi: true,
-      singleAttributePerLine: true,
-      singleQuote: true,
-      trailingComma: 'all',
-    };
-  }
+    constructor() {
+        this.#config = {
+            arrowParens: 'always',
+            bracketSameLine: false,
+            objectWrap: 'preserve',
+            plugins: [],
+            proseWrap: 'never',
+            semi: true,
+            singleAttributePerLine: true,
+            singleQuote: true,
+            trailingComma: 'all',
+        };
+    }
 
-  #replaceConfig(config) {
-    this.#config = { ...config };
+    #replaceConfig(config) {
+        this.#config = { ...config };
 
-    return this;
-  }
+        return this;
+    }
 
-  #addPlugin(plugin) {
-    return this.#replaceConfig({
-      ...this.#config,
-      plugins: this.#config.plugins.includes(plugin) ? [...this.#config.plugins] : [...this.#config.plugins, plugin],
-    });
-  }
+    #addPlugin(plugin) {
+        return this.#replaceConfig({
+            ...this.#config,
+            plugins: this.#config.plugins.includes(plugin) ? [...this.#config.plugins] : [...this.#config.plugins, plugin],
+        });
+    }
 
-  mergeOptions(options) {
-    return this.#replaceConfig({
-      ...this.#config,
-      ...options,
-      plugins: options.plugins === undefined ? [...this.#config.plugins] : [...options.plugins],
-    });
-  }
+    mergeOptions(options) {
+        return this.#replaceConfig({
+            ...this.#config,
+            ...options,
+            plugins: options.plugins === undefined ? [...this.#config.plugins] : [...options.plugins],
+        });
+    }
 
-  addPugPlugin() {
-    return this.#addPlugin('@prettier/plugin-pug');
-  }
+    addPugPlugin() {
+        return this.#addPlugin('@prettier/plugin-pug');
+    }
 
-  addXmlPlugin() {
-    return this.#replaceConfig({
-      ...this.#config,
-      plugins: this.#config.plugins.includes('@prettier/plugin-xml') ? [...this.#config.plugins] : [...this.#config.plugins, '@prettier/plugin-xml'],
-      xmlQuoteAttributes: 'double',
-      xmlSelfClosingSpace: true,
-      xmlWhitespaceSensitivity: 'preserve',
-    });
-  }
+    addXmlPlugin() {
+        return this.#replaceConfig({
+            ...this.#config,
+            plugins: this.#config.plugins.includes('@prettier/plugin-xml') ? [...this.#config.plugins] : [...this.#config.plugins, '@prettier/plugin-xml'],
+            xmlQuoteAttributes: 'double',
+            xmlSelfClosingSpace: true,
+            xmlWhitespaceSensitivity: 'preserve',
+        });
+    }
 
-  toConfig() {
-    return {
-      ...this.#config,
-      plugins: [...this.#config.plugins],
-    };
-  }
+    toConfig() {
+        return {
+            ...this.#config,
+            plugins: [...this.#config.plugins],
+        };
+    }
 }

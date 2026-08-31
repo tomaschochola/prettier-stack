@@ -1,62 +1,62 @@
 {
-  "author": {
-    "email": "tomaschochola@tomaschochola.cz",
-    "name": "Tomáš Chochola",
-    "url": "https://github.com/tomaschochola"
-  },
-  "bugs": {
-    "email": "tomaschochola@tomaschochola.cz",
-    "url": "https://github.com/tomaschochola/tooling-prettier/issues"
-  },
-  "contributors": [
-    {
-      "email": "tomaschochola@tomaschochola.cz",
-      "name": "Tomáš Chochola",
-      "url": "https://github.com/tomaschochola"
-    }
-  ],
-  "dependencies": {
-    "@prettier/plugin-pug": "^3.4.2",
-    "@prettier/plugin-xml": "^3.4.2",
-    "prettier": "^3.9.6"
-  },
-  "description": "Shared Prettier configuration builder and formatter plugin presets.",
-  "devDependencies": {
-    "@tomaschochola/tooling-eslint": "github:tomaschochola/tooling-eslint#main",
-    "@tomaschochola/tooling-trimmer": "github:tomaschochola/tooling-trimmer#main"
-  },
-  "exports": {
-    ".": "./src/index.js"
-  },
-  "files": [
-    "src",
-    "templates"
-  ],
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/tomaschochola"
-  },
-  "homepage": "https://github.com/tomaschochola/tooling-prettier",
-  "keywords": [
-    "tomaschochola",
-    "TomasChochola",
-    "Tomas Chochola",
-    "Tomáš Chochola",
-    "code-formatting",
-    "formatter",
-    "prettier",
-    "pug",
-    "tooling-prettier",
-    "xml"
-  ],
-  "license": "CC-BY-ND-4.0",
-  "main": "./src/index.js",
-  "name": "@tomaschochola/tooling-prettier",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomaschochola/tooling-prettier.git"
-  },
-  "type": "module",
-  "version": "0.0.0"
+    "author": {
+        "email": "tomaschochola@tomaschochola.cz",
+        "name": "Tomáš Chochola",
+        "url": "https://github.com/tomaschochola"
+    },
+    "bugs": {
+        "email": "tomaschochola@tomaschochola.cz",
+        "url": "https://github.com/tomaschochola/tooling-prettier/issues"
+    },
+    "contributors": [
+        {
+            "email": "tomaschochola@tomaschochola.cz",
+            "name": "Tomáš Chochola",
+            "url": "https://github.com/tomaschochola"
+        }
+    ],
+    "dependencies": {
+        "@prettier/plugin-pug": "^3.4.2",
+        "@prettier/plugin-xml": "^3.4.2",
+        "prettier": "^3.9.6"
+    },
+    "description": "Shared Prettier configuration builder and formatter plugin presets.",
+    "devDependencies": {
+        "@tomaschochola/tooling-eslint": "github:tomaschochola/tooling-eslint#main",
+        "@tomaschochola/tooling-trimmer": "github:tomaschochola/tooling-trimmer#main"
+    },
+    "exports": {
+        ".": "./src/index.js"
+    },
+    "files": [
+        "src",
+        "templates"
+    ],
+    "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/tomaschochola"
+    },
+    "homepage": "https://github.com/tomaschochola/tooling-prettier",
+    "keywords": [
+        "tomaschochola",
+        "TomasChochola",
+        "Tomas Chochola",
+        "Tomáš Chochola",
+        "code-formatting",
+        "formatter",
+        "prettier",
+        "pug",
+        "tooling-prettier",
+        "xml"
+    ],
+    "license": "CC-BY-ND-4.0",
+    "main": "./src/index.js",
+    "name": "@tomaschochola/tooling-prettier",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tomaschochola/tooling-prettier.git"
+    },
+    "type": "module",
+    "version": "0.0.0"
 }
