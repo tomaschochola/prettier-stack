@@ -41,6 +41,26 @@ export class PrettierConfigBuilder {
     }
 
     mergeOptions(options) {
+        if (typeof options !== 'object' || options === null || Array.isArray(options)) {
+            throw new TypeError('mergeOptions requires a plain options object.');
+        }
+
+        if (options.plugins !== undefined) {
+            if (!Array.isArray(options.plugins)) {
+                throw new TypeError('mergeOptions plugins must be an array of non-empty strings.');
+            }
+
+            for (const plugin of options.plugins) {
+                if (typeof plugin !== 'string' || plugin === '') {
+                    throw new TypeError('mergeOptions plugins must be an array of non-empty strings.');
+                }
+            }
+
+            if (new Set(options.plugins).size !== options.plugins.length) {
+                throw new TypeError('Duplicate plugin.');
+            }
+        }
+
         return this.#replaceConfig({
             ...this.#config,
             ...options,
@@ -53,9 +73,10 @@ export class PrettierConfigBuilder {
     }
 
     addXmlPlugin() {
+        this.#addPlugin('@prettier/plugin-xml');
+
         return this.#replaceConfig({
             ...this.#config,
-            plugins: this.#config.plugins.includes('@prettier/plugin-xml') ? [...this.#config.plugins] : [...this.#config.plugins, '@prettier/plugin-xml'],
             xmlQuoteAttributes: 'double',
             xmlSelfClosingSpace: true,
             xmlWhitespaceSensitivity: 'preserve',

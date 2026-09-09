@@ -101,3 +101,50 @@ test('copy templates expose the intended configuration tiers', async () => {
     assert.deepEqual(recommendedConfig.plugins, ['@prettier/plugin-xml']);
     assert.deepEqual(fullConfig.plugins, ['@prettier/plugin-xml', '@prettier/plugin-pug']);
 });
+
+test('rejects invalid merge options', () => {
+    assert.throws(() => new PrettierConfigBuilder().mergeOptions(null), /plain options object/u);
+    assert.throws(() => new PrettierConfigBuilder().mergeOptions([]), /plain options object/u);
+    assert.throws(() => new PrettierConfigBuilder().mergeOptions('options'), /plain options object/u);
+    assert.throws(() => new PrettierConfigBuilder().mergeOptions({ plugins: 'custom-plugin' }), /array of non-empty strings/u);
+    assert.throws(() => new PrettierConfigBuilder().mergeOptions({ plugins: [''] }), /array of non-empty strings/u);
+    assert.throws(() => new PrettierConfigBuilder().mergeOptions({ plugins: [42] }), /array of non-empty strings/u);
+    assert.throws(() => new PrettierConfigBuilder().mergeOptions({ plugins: ['custom-plugin', 'custom-plugin'] }), /Duplicate plugin/u);
+});
+
+test('keeps xml defaults on repeated plugin registration', () => {
+    const config = new PrettierConfigBuilder().addXmlPlugin().mergeOptions({ printWidth: 160 }).addXmlPlugin().toConfig();
+
+    assert.deepEqual(config.plugins, ['@prettier/plugin-xml']);
+    assert.equal(config.xmlQuoteAttributes, 'double');
+    assert.equal(config.xmlSelfClosingSpace, true);
+    assert.equal(config.xmlWhitespaceSensitivity, 'preserve');
+});
+
+test('formats deterministically on repeated runs', async () => {
+    const pugConfig = new PrettierConfigBuilder().addPugPlugin().toConfig();
+    const xmlConfig = new PrettierConfigBuilder().addXmlPlugin().toConfig();
+
+    const pugOnce = await formatWithResolvedConfig('div\n span hello\n', 'fixture.pug', {
+        ...pugConfig,
+        parser: 'pug',
+    });
+    const pugTwice = await formatWithResolvedConfig(pugOnce, 'fixture.pug', {
+        ...pugConfig,
+        parser: 'pug',
+    });
+
+    assert.equal(pugTwice, pugOnce);
+
+    const xmlSource = '<?xml version="1.0"?><root><value>a</value></root>\n';
+    const xmlOnce = await formatWithResolvedConfig(xmlSource, 'fixture.xml', {
+        ...xmlConfig,
+        parser: 'xml',
+    });
+    const xmlTwice = await formatWithResolvedConfig(xmlOnce, 'fixture.xml', {
+        ...xmlConfig,
+        parser: 'xml',
+    });
+
+    assert.equal(xmlTwice, xmlOnce);
+});
