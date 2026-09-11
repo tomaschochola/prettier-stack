@@ -92,10 +92,10 @@ test('formats XML with the default whitespace policy', async () => {
     );
 });
 
-test('copy templates expose the intended configuration tiers', async () => {
-    const { default: baseConfig } = await import('../templates/base.js');
-    const { default: recommendedConfig } = await import('../templates/recommended.js');
-    const { default: fullConfig } = await import('../templates/full.js');
+test('copy scaffolds expose the intended configuration tiers', async () => {
+    const { default: baseConfig } = await import('../scaffolds/base.js');
+    const { default: recommendedConfig } = await import('../scaffolds/recommended.js');
+    const { default: fullConfig } = await import('../scaffolds/full.js');
 
     assert.deepEqual(baseConfig.plugins, []);
     assert.deepEqual(recommendedConfig.plugins, ['@prettier/plugin-xml']);
